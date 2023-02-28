@@ -32,6 +32,31 @@ To create a new note:
 ```sh
 >>> new_note = Notes.objects.create(title = "A second note" , text = "This is a second note")
 ```
+Use QuerySet to iterate over the notes, filter them based on certain criteria, order them in a specific way, or perform other operations. For example, you can iterate over the notes and print their titles as follows:
+```sh
+>>> Notes.objects.all()
+<QuerySet [<Notes: Notes object (1)>, <Notes: Notes object (2)>]>
+>>> notes = Notes.objects.all()
+>>> for note in notes:
+...     print(note.title)
+... 
+My First Note
+A second note
+>>> 
+```
+More examples of using filter and exclude to query data:
+```sh
+>>> Notes.objects.filter(title__startswith= "My")
+<QuerySet [<Notes: Notes object (1)>]>
+>>> Notes.objects.filter(text__icontains= "Django")
+<QuerySet [<Notes: Notes object (1)>]>
+>>> Notes.objects.exclude(text__icontains = "Django")
+<QuerySet [<Notes: Notes object (2)>]>
+>>> Notes.objects.filter(text__icontains = "Django").exclude(title__icontains = "Django")
+<QuerySet [<Notes: Notes object (1)>]>
+>>> 
+```
+
 
 
 
